@@ -7,8 +7,8 @@
 #6.after each pass,the largest element is placed at correct position
 #7.repeat process for remaining unsorted part of array
 #8.stop when no swaps are needed or after n-1 passes 
-#time complexit 0(n^2)
-#space complexity 0(1)
+#time complexit O(n^2)
+#space complexity O(1)
 class Solution:
     def bubbleSort(self, nums):
         N=len(nums)
@@ -19,4 +19,5 @@ class Solution:
                     nums[j]=nums[j+1]
                     nums[j+1]=temp
         return nums
+
 
