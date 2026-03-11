@@ -1,3 +1,10 @@
+#algorithm
+#1.divide the array into halves
+#2.recursively sort both halves
+#3.merge the two sorted halves into one sorted array
+#4.repeat untill entire array is sorted
+#time complexity O(n log n)
+#space complexity O(n)
 class Solution:
     def mergeSort(self, nums):
         self.divide(nums,0,len(nums)-1)
@@ -29,3 +36,4 @@ class Solution:
             nums[i]=temp[i-low]
     
             
+
