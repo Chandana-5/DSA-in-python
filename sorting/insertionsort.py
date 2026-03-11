@@ -4,8 +4,8 @@
 #3.move all elements that are greater than current element one position ahead
 #4.insert the current element in its correct position
 #5.repeat untill the array is sorted
-#time complexity 0(n^2)
-#space complexity 0(1)
+#time complexity O(n^2)
+#space complexity O(1)
 class Solution:
     def insertionSort(self, nums):
         N=len(nums)
@@ -17,4 +17,5 @@ class Solution:
                 nums[j]=temp 
                 j=j-1
         return nums
+
 
