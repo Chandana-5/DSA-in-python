@@ -1,3 +1,11 @@
+#algorithm
+#1.choose a pivot elements smaller than the pivot to left
+#2.place all elements smaller than pivot to left
+#3.place all elements grater than the pivot to right
+#4.recursively apply the same process to the left and right subarrays
+#5.continue untill the array becomes sorted 
+#time complexity O(N log N)
+#space complexity O(N)
 class solution:
     def quicksort(self,nums):
         def partition(nums,low,high):
@@ -20,3 +28,4 @@ class solution:
                 qs(nums,pIndex+1,high)
         qs(nums, 0, len(nums) - 1)
         return nums
+
