@@ -7,7 +7,7 @@
 class solution:
     def largestelement(self,nums):
         nums.sort()
-        return nums[-1
+        return nums[-1]
 
 
         
@@ -29,4 +29,5 @@ class Solution:
                 largest=nums[i]
         return largest
         
+
 
