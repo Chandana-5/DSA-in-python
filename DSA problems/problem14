@@ -1,0 +1,25 @@
+def miniMaxSum(arr):
+    n = len(arr)
+    
+    maximum = arr[0]
+    minimum = arr[0]
+    
+    for i in range(n):
+        if arr[i] > maximum:
+            maximum = arr[i]
+        if arr[i] < minimum:
+            minimum = arr[i]
+    
+    total = 0
+    for i in range(n):
+        total += arr[i]
+    
+    min_sum = total - maximum
+    max_sum = total - minimum
+    
+    print(min_sum, max_sum)
+if __name__ == '__main__':
+
+    arr = list(map(int, input().rstrip().split()))
+
+    miniMaxSum(arr)
