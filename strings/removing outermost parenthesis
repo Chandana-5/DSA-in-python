@@ -1,0 +1,31 @@
+#algorithm
+#1.Initialize an empty result string to store the processed output
+#2.Initialize a counter (level) to track the depth of parentheses
+#3.Traverse through the string character by character:
+#4.If the current character is '(', increment the level counter. If the level is greater than 1 (indicating we're inside a valid primitive), add '(' to the result string
+#5.If the current character is ')', decrement the level counter. If the level is greater than 0 (indicating we're still inside a valid primitive), add ')' to the result string
+#6.After the entire string has been traversed, return the result string
+class Solution:
+    # Function to remove outer parentheses
+    def removeOuterParentheses(self, s):
+        # Initialize result string
+        result = ""  
+        # Initialize nesting level counter
+        level = 0     
+
+        # Traverse the string
+        for char in s:
+            # If we encounter '(', increase the level
+            if char == '(':
+                # If we're inside a primitive, add '(' to result
+                if level > 0:
+                    result += char
+                # Increase the nesting level for '('
+                level += 1  
+            elif char == ')':
+                # Decrease the nesting level for ')'
+                level -= 1  
+                # If we're inside a primitive, add ')' to result
+                if level > 0:
+                    result += char
+        return result
