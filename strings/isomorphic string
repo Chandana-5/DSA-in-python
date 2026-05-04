@@ -1,0 +1,25 @@
+#algorithm
+#1.Think of isomorphism as a consistent one-to-one mapping between characters of two strings.
+#2.The goal is to ensure the pattern of appearances and repetitions is identical in both strings.
+#3.Use two fixed-size arrays (size 256) to track the last-seen positions of characters from each string.
+#4.While scanning both strings together, compare if the characters at the current position have been seen at the same relative positions before.
+#5.If not, it indicates inconsistent mapping — one character maps to multiple others — return false.
+#6.If consistent, update the last seen position of both characters to ensure future checks remain valid.
+#7.This approach confirms isomorphic structure by comparing character occurrence patterns, not the characters themselves
+#time complexity-O(N)
+#space complexity-O(1)
+class Solution:
+      def isomorphicString(self, s, t):
+          m1, m2 = [0] * 256, [0] * 256
+          n = len(s)
+          for i in range(n):
+              if m1[ord(s[i])] != m2[ord(t[i])]:
+                  return False
+              m1[ord(s[i])] = i + 1
+              m2[ord(t[i])] = i + 1
+          return True
+  
+
+  
+      # Check and print whether strings are isomorphic
+      if solution.isomorphicString(s, t):
