@@ -1,0 +1,35 @@
+#algorithm
+#brutte force
+#1.Start by generating all possible left rotations of the original string using substring slicing and concatenation.
+#2.For each rotated version of the string, compare it with the target (goal) string.
+#3.If a match is found at any point, return true immediately as the goal can be achieved.
+#4.If none of the rotations match the goal string after checking all possibilities, return false
+#Time Complexity: O(N^2)
+#Space Complexity: O(N) 
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        # Check if strings are of the same length
+        if len(s) != len(goal):
+            return False  
+
+        # Try all possible rotations of s
+        for i in range(len(s)):
+            # Generate a rotated version of s
+            rotated = s[i:] + s[:i]  
+            # If the rotated version matches goal, return True
+            if rotated == goal:
+                return True  
+  #better approaches
+  #1.Double the original string by joining it with itself, creating a new string like s + s.
+#2.Look for the target string goalinside this new doubled string.
+#3.If goal exists within the doubled string, then it's a valid rotation, return true.
+#4.If it's not found, that means the original string cannot be rotated to match goal, return false
+#Time Complexity: O(N)
+#Space Complexity: O(N)
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        if len(s) != len(goal):
+            return False  
+        doubled_s = s + s 
+        return goal in doubled_s 
+        
