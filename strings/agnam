@@ -1,0 +1,51 @@
+#algorithm
+#brutte
+#1.First, check if the lengths of both strings are equal. If not, they can't be anagrams and return false immediately.
+#2.If the lengths match, sort both strings using a built-in sorting algorithm.
+#3.Once sorted, iterate through each character of both strings and compare them one by one.
+#4.If any character mismatch is found, return false.
+#5.If all characters match, return true, confirming that the strings are anagrams.
+#time complexity-O(N log N),
+#space complexity-O(1)
+def CheckAnagrams(str1, str2):
+    # Case 1: when both of the strings have different lengths
+    if len(str1) != len(str2):
+        return False  # Strings can't be anagrams if lengths are different
+
+    # Sort both strings
+    if sorted(str1) == sorted(str2):
+        return True  # Strings are anagrams if sorted versions are equal
+    return False  
+#optimal approach
+#1.First, check if the lengths of both strings are equal. If not, return false immediately as they cannot be anagrams.
+#2.Initialize a frequency array of size 26 (for all uppercase English letters) and set all elements to 0.
+#3.Traverse the first string and increment the frequency of each character.
+#4.Traverse the second string and decrement the frequency of each character.
+#5.Finally, check if all elements in the frequency array are zero. If any element is not zero, return false as the characters do not match in frequency.
+#6.If all frequencies are zero, the strings are anagrams and the function returns true.
+#time complexity-O(N)
+#space complexity-O(1)
+def CheckAnagrams(str1, str2):
+    # Case: when both of the strings have different lengths
+    if len(str1) != len(str2):
+        return False  # Strings can't be anagrams if lengths are different
+
+    # Initialize a frequency array to store character counts
+    freq = [0] * 26
+
+    # Count frequency of each character in str1
+    for char in str1:
+        freq[ord(char) - ord('A')] += 1  # Increment frequency for each character in str1
+
+    # Decrement frequency for each character in str2
+    for char in str2:
+        freq[ord(char) - ord('A')] -= 1  # Decrement frequency for each character in str2
+
+    # Check if all frequencies are zero, meaning both strings have the same characters
+    for count in freq:
+        if count != 0:
+            return False  # If any frequency is non-zero, they are not anagrams
+
+    return True  # The strings are anagrams if all frequencies are zero
+
+
