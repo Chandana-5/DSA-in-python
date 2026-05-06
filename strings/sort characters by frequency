@@ -1,0 +1,17 @@
+#algorithm
+#1.The goal is to rank characters based on how frequently they appear in the string.
+#2.We need a structure that can track both the character and how often it occurs.
+#3.Sorting the characters by frequency helps surface the most significant ones first.
+#4.To maintain consistency when frequencies match, tie-breaking is done alphabetically.
+#5.Once sorted, the characters with non-zero occurrences form the final ranked result.
+#time complexity-O(n + k log k), where n is the length of the string and k is the constant 26 for the alphabet.
+#space complexity-O(k)
+class Solution:
+    def frequencySort(self, s):
+        freq = [(0, chr(i + ord('a'))) for i in range(26)]
+        for ch in s:
+            index = ord(ch) - ord('a')
+            freq[index] = (freq[index][0] + 1, ch)
+        freq.sort(key=lambda x: (-x[0], x[1])
+        result = [ch for f, ch in freq if f > 0]
+        return result
