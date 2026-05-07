@@ -1,0 +1,23 @@
+#algorithm
+#1.We're interested in measuring how deeply nested the parentheses are at any point in the string.
+#2.Each opening bracket indicates going deeper into a new level of nesting.
+#3.Each closing bracket signals returning to the previous level of nesting.
+#4.By tracking how deep we go at each step, we can monitor the peak nesting level.
+#5.The deepest level we reach during this traversal is the answer.
+#time complexity-O(N)
+#space complexity-O(1)
+class Solution:
+    # Method to compute maximum depth of parentheses
+    def maxDepth(self, s: str) -> int:
+        p = 0  
+        ans = 0
+        for ch in s:
+            # Increase depth on open parenthesis
+            if ch == '(':
+                p += 1
+            # Decrease depth on close parenthesis
+            elif ch == ')':
+                p -= 1
+            # Update maximum depth encountered
+            ans = max(ans, p)
+        return ans  
