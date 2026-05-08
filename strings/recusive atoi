@@ -1,0 +1,32 @@
+#algorithm
+#1.Define a helper function that takes the string s, current index i, current result num, and sign.
+#2.Recursively skip leading whitespaces until a non-whitespace character is found.
+#3.Handle the sign if present (positive or negative).
+#4.Recursively process each digit:
+#5.Continue until the end of the string or a non-digit character is encountered.
+#6.For each digit, update the result.
+#7.Clamp the result to INT_MIN or INT_MAX to handle overflow conditions.
+#time complexity-o(n)
+#space complexity-o(n)
+INT_MIN = -2**31
+INT_MAX = 2**31 - 1
+
+def helper(s, i, num, sign):
+    # Base case: end of string or non-digit
+    if i >= len(s) or not s[i].isdigit():
+        return sign * num
+    num = num * 10 + int(s[i])
+
+    if sign * num <= INT_MIN: return INT_MIN
+    if sign * num >= INT_MAX: return INT_MAX
+    return helper(s, i + 1, num, sign)
+
+def myAtoi(s):
+    i = 0
+    while i < len(s) and s[i] == ' ':
+        i += 1
+    sign = 1
+    if i < len(s) and (s[i] == '+' or s[i] == '-'):
+        sign = -1 if s[i] == '-' else 1
+        i += 1
+    return helper(s, i, 0, sign)
