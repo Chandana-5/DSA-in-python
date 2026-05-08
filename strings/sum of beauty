@@ -1,0 +1,27 @@
+#algorithm
+#1. through all substrings of the string.
+#2.Maintain a frequency map of characters for each substring.
+#3.For each substring:
+#4.Find the most frequent character's count.
+#5.Find the least frequent non-zero character's count.
+#6.Calculate the difference between the two counts.
+#7.Add the difference to the running sum.
+#time complexity-O(N)
+#space complexity-O(1)
+def beauty_sum(s):
+    n = len(s)
+    total = 0
+
+    # Loop over all substrings
+    for i in range(n):
+        freq = {}
+
+        for j in range(i, n):
+            freq[s[j]] = freq.get(s[j], 0) + 1
+
+            values = freq.values()
+            maxi = max(values)
+            mini = min(values)
+            total += (maxi - mini)
+
+    return total
