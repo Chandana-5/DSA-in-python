@@ -1,0 +1,28 @@
+#deletion of head
+def delete_head(self):
+    if not self.head:
+        print("List is empty.")
+        return
+    self.head = self.head.next  # Move head to the next node
+#deletion of tail
+class Node:
+    def __init__(self, data, next=None):  # 'next-none' → 'next=None' (default param syntax)
+                                           # 'head' → 'data' (head is for linked list, not node)
+        self.data = data
+        self.next = next
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def delete_tail(self):
+        if self.head is None or self.head.next is None:  # Empty or single node edge case
+            self.head = None
+            return
+
+        temp = self.head
+        while temp.next.next is not None:   # 'none' → 'None' (Python is case-sensitive)
+            temp = temp.next
+
+        temp.next = None                    # Unlink the tail node
+        return self.head                    # 'return' was outside the method (indentation fix)

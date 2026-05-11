@@ -1,5 +1,0 @@
-def delete_head(self):
-    if not self.head:
-        print("List is empty.")
-        return
-    self.head = self.head.next  # Move head to the next node
