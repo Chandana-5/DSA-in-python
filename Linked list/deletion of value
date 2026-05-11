@@ -1,0 +1,30 @@
+class Node:
+    def __init__(self, data, next=None):   # 'next-none' → 'next=None'
+        self.data = data
+        self.next = next
+
+class LinkedList:
+    def __init__(self):
+        self.head = None                   # Moved from assign() — belongs in constructor
+
+    def delete_node(self, k):             # 'k' must be passed as parameter
+        temp = self.head
+        cnt = 1                           # Start count at 1, not 0
+        prev = None
+
+        # Edge case: delete head node
+        if k == 1:
+            self.head = self.head.next
+            return self.head
+
+        # Traverse to find the k-th node
+        while temp is not None:
+            if cnt == k:
+                prev.next = temp.next     # 'prev=temp.next' → 'prev.next=temp.next'
+                break
+            else:
+                prev = temp              # Track previous node
+                cnt += 1
+                temp = temp.next
+
+        return self.head                 # Fixed indentation — was outside the method
