@@ -1,0 +1,51 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_position(self, data, k):
+        new_node = Node(data)
+
+        # Case 1: Insert at head (position 1)
+        if k == 1:
+            new_node.next = self.head
+            self.head = new_node
+            return
+
+        # Case 2: Traverse to (k-1)th node
+        current = self.head
+        for i in range(1, k - 1):
+            if current is None:
+                print(f"Position {k} is out of range.")
+                return
+            current = current.next
+
+        # Case 3: Position is beyond list length
+        if current is None:
+            print(f"Position {k} is out of range.")
+            return
+
+        # Insert the new node
+        new_node.next = current.next
+        current.next = new_node
+
+    def display(self):
+        elements = []
+        current = self.head
+        while current:
+            elements.append(str(current.data))
+            current = current.next
+        print(" -> ".join(elements))
+
+
+# Example usage
+ll = LinkedList()
+ll.insert_at_position(10, 1)   # Insert at head
+ll.insert_at_position(20, 2)   # Insert at tail
+ll.insert_at_position(30, 3)   # Insert at tail
+ll.insert_at_position(99, 2)   # Insert at middle (position 2)
+ll.display()                   # Output: 10 -> 99 -> 20 -> 30
