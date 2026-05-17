@@ -1,0 +1,89 @@
+#brutte
+#algorithm
+#1.Traverse the entire linked list using a temporary pointer.
+#2.While traversing, keep a track of the visited nodes in the map data structure.
+#3.If a previously visited node is encountered again, that proves that there is a loop in the linked list hence return true.
+#4.If the traversal is completed, and we reach the last point of the list which is null, it means there was no loop, hence we return false.
+#5.Storing the entire node in the map is essential to distinguish between nodes with identical values but different positions in the list. This ensures accurate loop detection and not just duplicate value checks.
+class Node:
+    # Constructor with both data and next node as parameters
+    def __init__(self, data1, next1=None):
+        # Data stored in the node
+        self.data = data1
+        # Pointer to the next node in the list
+        self.next = next1
+
+# Solution class with detectLoop function
+class Solution:
+    # function to detect loop in linked list
+    def detectLoop(self, head):
+        # Initialize a pointer 'temp'
+        # at the head of the linked list
+        temp = head
+
+        # Create a set to keep track of
+        # encountered nodes
+        nodeMap = {}
+
+        # Step 2: Traverse the linked list
+        while temp is not None:
+            # If the node is already in the
+            # map, there is a loop
+            if temp in nodeMap:
+                return True
+            # Store the current node
+            # in the map
+            nodeMap[temp] = 1
+
+            # Move to the next node
+            temp = temp.next
+
+        # Step 3: If the list is successfully traversed 
+        # without a loop, return false
+        return False
+
+#optimal 
+#1.To detect a cycle using the Tortoise and Hare method, we start by initializing two pointers, slow and fast, at the head of the linked list.
+#2.The slow pointer moves forward one step at a time, while the fast pointer advances two steps at a time.
+#3.If the fast pointer or its next becomes null, it means the end of the linked list has been reached. In this case, there is no loop, and the list is linear.
+#4.If the slow and fast pointers eventually meet at the same node, it confirms that a cycle exists in the linked list.
+#5.Storing the entire node in the map is essential to distinguish between nodes with identical values but different positions in the list.
+#6.This ensures accurate loop detection and not just duplicate value checks.
+  class Node:
+    # Constructor with both data and next node as parameters
+    def __init__(self, data1, next1=None):
+        # Data stored in the node
+        self.data = data1
+        # Pointer to the next node in the list
+        self.next = next1
+
+# Solution class with detectLoop function
+class Solution:
+    # function to detect loop in linked list
+    def detectLoop(self, head):
+        # Initialize a pointer 'temp'
+        # at the head of the linked list
+        temp = head
+
+        # Create a set to keep track of
+        # encountered nodes
+        nodeMap = {}
+
+        # Step 2: Traverse the linked list
+        while temp is not None:
+            # If the node is already in the
+            # map, there is a loop
+            if temp in nodeMap:
+                return True
+            # Store the current node
+            # in the map
+            nodeMap[temp] = 1
+
+            # Move to the next node
+            temp = temp.next
+
+        # Step 3: If the list is successfully traversed 
+        # without a loop, return false
+        return False
+
+
