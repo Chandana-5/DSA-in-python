@@ -1,0 +1,124 @@
+#brutte
+#1.Traverse the linked list from start to end, and push each node's value into a stack.
+#2.Once done, start again from the head of the linked list.
+#3.For each node, pop an element from the stack and compare it with the current node’s value.
+#4.If any value doesn’t match, return false — it’s not a palindrome.
+#5.If all values match till the end, return true — the list is a palindrome.
+#time complexity-O(N)
+#space complexity-O(N)
+def b_search(elem, arr, n):
+    start = 0
+    end = n - 1
+
+    # Perform binary search
+    while start <= end:
+        mid = (start + end) // 2
+
+        # If element is found, return True
+        if arr[mid] == elem:
+            return True
+        elif arr[mid] < elem:
+            start = mid + 1
+        else:
+            end = mid - 1
+    return False  # If the element is not found
+
+# Function to check if arr1[] is a subset of arr2[]
+def is_subset(arr1, m, arr2, n):
+    # Sort arr2[] for efficient binary search
+    arr2.sort()
+
+    # If arr1[] has more elements than arr2[], it cannot be a subset
+    if m > n:
+        return False
+
+    # For each element in arr1[], check if it exists in arr2[]
+    for i in range(m):
+        present = b_search(arr1[i], arr2, n)  # Check if arr1[i] is present in arr2[]
+
+        # If any element from arr1[] is not present in arr2[], return False
+        if not present:
+            return False
+
+    # If all elements of arr1[] are found in arr2[], return True
+    return True
+
+
+    if ans:
+        print("arr1[] is a subset of arr2[]")
+    else:
+        print("arr1[] is not a subset of arr2[]")
+#optimal
+#1.Return true if the list is empty or has only one node, since such lists are palindromes by default.
+#2.Use two pointers ‘slow’ and ‘fast’ to find the middle node, where slow moves one step and fast moves two steps at a time.
+#3.Reverse the second half of the linked list starting from the node after the middle (slow->next), preparing it for comparison.
+#4.Set two pointers: one at the head of the list and the other at the head of the reversed second half, to compare both halves.
+#5.Compare both halves node by node; if any mismatch occurs, return false, otherwise continue till the end of either list.
+#6.Reverse the second half again to restore the original list structure, and return true if all nodes matched successfully
+#time complexity-O(1)
+#space complexity-O(1)
+class Node:
+    def __init__(self, data, next_node=None):
+        self.data = data       # Data stored in the node
+        self.next = next_node  # Pointer to the next node in the list
+
+# Function to reverse a linked list using the recursive approach
+def reverse_linked_list(head):
+    if head is None or head.next is None:
+        return head  # No change is needed; return the current head
+
+    # Recursive step: Reverse the remaining part of the list and get the new head
+    new_head = reverse_linked_list(head.next)
+
+    # Store the next node in 'front' to reverse the link
+    front = head.next
+
+    # Update the 'next' pointer of 'front' to point to the current head
+    front.next = head
+
+    # Set the 'next' pointer of the current head to None to break the original link
+    head.next = None
+
+    return new_head  # Return the new head obtained from the recursion
+
+# Function to check if the linked list is a palindrome
+def is_palindrome(head):
+    if head is None or head.next is None:
+        return True  # It's a palindrome by definition
+
+    slow = head
+    fast = head
+
+    # Traverse the linked list to find the middle using slow and fast pointers
+    while fast.next is not None and fast.next.next is not None:
+        slow = slow.next      # Move slow pointer one step at a time
+        fast = fast.next.next # Move fast pointer two steps at a time
+
+    # Reverse the second half of the linked list starting from the middle
+    new_head = reverse_linked_list(slow.next)
+
+    first = head
+    second = new_head
+
+    # Compare data values of nodes from both halves
+    while second is not None:
+        if first.data != second.data:
+            reverse_linked_list(new_head)  # Reverse the second half back to its original state
+            return False
+
+        first = first.next  # Move the first pointer
+        second = second.next  # Move the second pointer
+
+    # Reverse the second half back to its original state
+    reverse_linked_list(new_head)
+
+    return True  # The linked list is a palindrome
+
+# Function to print the linked list
+def print_linked_list(head):
+    temp = head
+    while temp:
+        print(temp.data, end=" ")  # Print the current node's data
+        temp = temp.next           # Move to the next node
+    print()
+
