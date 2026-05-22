@@ -1,0 +1,130 @@
+#iterative method
+#1.Reverse the list and start from the head and add 1. Carry it forward as needed.
+#2.If a carry remains after the last node, add a new node with value 1.
+#3. Reverse the list again to restore the original order and return the head of the modified list.
+#time complexity-O(n)
+#space complexity-O(1)
+class Node:
+    def __init__(self, value):
+        self.data = value
+        self.next = None
+
+# LinkedList class to manage node-level operations
+class LinkedList:
+    # function to insert digit at the end
+    def append(self, head, value):
+        new_node = Node(value)
+        if not head:
+            return new_node
+        current = head
+        while current.next:
+            current = current.next
+        current.next = new_node
+        return head
+
+    # Function to print the list
+    def printList(self, head):
+        current = head
+        while current:
+            print(current.data, end='')
+            current = current.next
+        print()
+
+# Solution class having the addOne logic 
+class Solution:
+    # function to reverse the linked list
+    def reverseList(self, node):
+        prev = None
+        current = node
+
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        return prev
+
+    # Function to add one to the number represented by the linked list
+    def addOne(self, head):
+        # Reverse the list to make least significant digit accessible
+        head = self.reverseList(head)
+
+        current = head
+        carry = 1  
+
+        # Traverse the list and add carry
+        while current and carry:
+            sum_ = current.data + carry
+            current.data = sum_ % 10
+            carry = sum_ // 10
+
+            # If there's no next node and we still have a carry, append a new node
+            if not current.next and carry:
+                current.next = Node(carry)
+                carry = 0  
+
+            current = current.next
+
+        # Reverse the list back to restore original order
+        head = self.reverseList(head)
+        return head
+#recursive 
+#1.Using a recursive function, traverse to the end of the linked list
+#2.Add 1 to the last node and propagate any resulting carry backwards through the recursive calls.
+#3.At each step, add the carry to the current node's value and update the carry.
+#4.Once recursion completes, if a carry still remains, create a new node at the beginning of the list with value 1.
+#5.Return the updated head of the list.
+#time complexity-O(n)
+#space complexity-O(n)
+class Node:
+    def __init__(self, value):
+        self.data = value
+        self.next = None
+
+# LinkedList class having only append and print logic
+class LinkedList:
+    # Function to insert digit at the end
+    def append(self, head, value):
+        new_node = Node(value)
+        if not head:
+            return new_node
+        current = head
+        while current.next:
+            current = current.next
+        current.next = new_node
+        return head
+
+    # Function to print the list
+    def printList(self, head):
+        current = head
+        while current:
+            print(current.data, end='')
+            current = current.next
+        print()
+
+# Solution class having the addOne logic
+class Solution:
+    # Recursive function to add one from least significant digit (rightmost node)
+    def addOneUtil(self, node):
+        # Base case: when reaching beyond last node, return carry = 1
+        if not node:
+            return 1
+        # Recurse to the end
+        carry = self.addOneUtil(node.next)  
+        total = node.data + carry
+        node.data = total % 10
+        # Return new carry
+        return total // 10  
+
+    # Function to add one to the number represented by the linked list
+    def addOne(self, head):
+        # Perform recursive addition
+        carry = self.addOneUtil(head)
+
+        # If carry remains after processing the head, create a new head node
+        if carry:
+            new_head = Node(carry)
+            new_head.next = head
+            head = new_head
+        return head
+
