@@ -4,6 +4,8 @@
 #3.Storing the entire node in the map is necessary to differentiate between nodes with the same value but different positions, ensuring proper detection of cycles instead of just duplicates.
 #4.If a node already exists in the map, this confirms a loop, and we return that node as the starting point of the loop.
 #5.If the traversal reaches the end of the list (null), it means no loop exists, so return null.
+#time complexity-O(n)
+#space complexity-O(n)
 class ListNode:
     def __init__(self, val):
         self.val = val
@@ -37,6 +39,8 @@ class Solution:
 `#4.fast` or `fast.next` reaches the end of the linked list (i.e., becomes null). In this case, there is no loop in the linked list, and the algorithm terminates by returning null.
 `#5.fast` and `slow` pointers meet at the same node. This indicates the presence of a loop in the linked list.
 #6.Reset the `slow` pointer to the head of the linked list. Move `fast` and `slow` one step at a time until they meet again. The point where they meet again is the starting point of the loop.
+#time complexity-O(n)
+#space complexity-O(1)
 class ListNode:
     def __init__(self, val):
         self.val = val
