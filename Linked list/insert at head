@@ -1,4 +1,10 @@
-
+#algorithm
+#1.Create a new node.
+#2.Store the data in the new node.
+#3.Set newNode.prev = NULL.
+#4.Set newNode.next = head.
+#5.If head is not NULL, set head.prev = newNode.
+#6.Move head to the new node.
     class Node:
     def __init__(self, data):
         self.data = data
