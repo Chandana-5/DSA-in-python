@@ -1,0 +1,61 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        curr = self.head
+        while curr.next:
+            curr = curr.next
+        curr.next = new_node
+        new_node.prev = curr
+
+    def delete_key(self, key):
+        curr = self.head
+
+        # Step 1: Search for the node
+        while curr and curr.data != key:
+            curr = curr.next
+
+        # Step 2: Key not found
+        if curr is None:
+            print(f"Key {key} not found.")
+            return
+
+        # Step 3: Only one node in the list
+        if curr.prev is None and curr.next is None:
+            self.head = None
+
+        # Step 4: Node is the head
+        elif curr.prev is None:
+            self.head = curr.next
+            self.head.prev = None
+
+        # Step 5: Node is the tail
+        elif curr.next is None:
+            curr.prev.next = None
+
+        # Step 6: Node is in the middle
+        else:
+            curr.prev.next = curr.next
+            curr.next.prev = curr.prev
+
+        del curr
+        print(f"Key {key} deleted successfully.")
+
+    def display(self):
+        elements = []
+        curr = self.head
+        while curr:
+            elements.append(str(curr.data))
+            curr = curr.next
+        print("List: " + " <-> ".join(elements) if elements else "List is empty.")
