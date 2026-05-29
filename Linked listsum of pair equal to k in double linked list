@@ -1,0 +1,40 @@
+class Node:
+    def __init__(self, data, next=None, prev=None):
+        self.data = data
+        self.next = next
+        self.prev = prev
+
+
+class Solution:
+    def __init__(self, head):
+        self.head = head
+
+    def findPairs(self, k):
+        arr = []
+        temp1 = self.head                  # Fix 1: self.head
+
+        while temp1 is not None:
+            temp2 = temp1.next             # Fix 2: start temp2 after temp1
+
+            while temp2 is not None:       # Fix 3: correct loop condition
+                if temp1.data + temp2.data == k:
+                    arr.append((temp1.data, temp2.data))
+                temp2 = temp2.next         # Fix 4: was "nexttemp2.next"
+
+            temp1 = temp1.next
+
+        return arr
+
+
+# ─── Test ───────────────────────────────────────────
+# Build list: 1 <-> 2 <-> 3 <-> 4 <-> 5
+head = Node(1)
+head.next = Node(2, prev=head)
+head.next.next = Node(3, prev=head.next)
+head.next.next.next = Node(4, prev=head.next.next)
+head.next.next.next.next = Node(5, prev=head.next.next.next)
+
+sol = Solution(head)
+print(sol.findPairs(6))   # [(1,5), (2,4)]
+print(sol.findPairs(7))   # [(2,5), (3,4)]
+print(sol.findPairs(9))   # [(4,5)]
