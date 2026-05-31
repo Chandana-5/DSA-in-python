@@ -1,0 +1,63 @@
+#algorithm
+#1.Start with a dummy node pointing to the head of the list to simplify edge cases.
+#2.Set a pointer groupPrev to dummy (this keeps track of the end of the previous reversed group).
+#3.While there are at least k nodes remaining:
+#4.Use getKthNode from groupPrev to find the end of the current k-sized group.
+#5.If getKthNode returns null (less than k nodes left), break the loop.
+#6.Keep track of the next group’s start using kth.next.
+#7.Temporarily break the link after the k-th node so we can reverse this segment cleanly.
+#8.Call reverseLinkedList on the current group’s head to reverse this k-segment.
+#9.Connect the previous group’s tail (groupPrev) to the head of the reversed segment.
+#10.Connect the tail of the reversed segment to the start of the next group.
+#11.Update groupPrev to point to the tail of the reversed segment.
+#time complexity-O(N)
+#space complexity-O(1)
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Solution:
+    # Function to reverse nodes in k-sized groups
+    def reverseKGroup(self, head, k):
+        # Creating a dummy node
+        dummy = ListNode(0)
+        dummy.next = head
+
+        # Pointer to the tail of the last reversed group
+        groupPrev = dummy
+
+        while True:
+            # Get the k-th node in the group
+            kth = self.getKthNode(groupPrev, k)
+            if not kth:
+                break
+
+            # Store the next group’s start
+            groupNext = kth.next
+
+            # Reverse the current k nodes
+            prev = groupNext
+            curr = groupPrev.next
+
+            for _ in range(k):
+                temp = curr.next
+                curr.next = prev
+                prev = curr
+                curr = temp
+
+            # Connect the reversed group to the previous part
+            temp = groupPrev.next
+            groupPrev.next = kth
+            groupPrev = temp
+
+        # Return new head
+        return dummy.next
+
+    # Helper function to find the k-th node from current
+    def getKthNode(self, curr, k):
+        while curr and k > 0:
+            curr = curr.next
+            k -= 1
+        return curr
+
