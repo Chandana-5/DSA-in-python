@@ -1,7 +1,9 @@
 #brutte
 #1.Create an empty array to store the node values. Iterate the linked list using a temporary pointer to the head and push the value of temporary node into the array.
 #2.Sort the array containing node values in ascending order.
-#3.Convert the sorted array back to a linked list reassigning the values from the sorted array and overwriting them sequentially according to their order in the array.
+#4.time complexity -O(N)
+space cpmlexity -O(n log n) 
+.Convert the sorted array back to a linked list reassigning the values from the sorted array and overwriting them sequentially according to their order in the array.
 class Node:
     # Constructor with data and next pointer
     def __init__(self, data1, next1=None):
@@ -55,6 +57,7 @@ def printLinkedList(head):
 #4.Recursively apply merge sort on both halves of the linked list until each part is broken down into single nodes or empty lists.
 #5.Merge the two sorted halves using a helper function that compares node values from both halves, attaches the smaller one to the result list, and continues until all nodes from both halves are merged.
 #6.Return the head of the merged and fully sorted linked list, which will represent the final sorted list.
+time co.plexity - O(N)
 class Node:
     # Constructor with data and next pointer
     def __init__(self, data1, next1=None):
