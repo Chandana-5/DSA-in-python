@@ -1,0 +1,56 @@
+#brutte
+#1.First, we create two variables: cnt_max is set to 0 and will keep track of the highest number of 1s found so far, and index is set to -1 and will store the row number with the most 1s.
+#2.Then, we go through each row of the matrix one by one using a loop.
+#3.Inside that loop, for each row, we count how many 1s it contains using another loop.
+#4.If this count is higher than our current maximum cnt_max, we update cnt_max with this new count and set indexto the current row number.
+#5.At the end, we return the index. It will either be the row number with the most 1s, or -1 if no 1s were found.
+#time complexityO(n X m),
+#space complexityO(1)
+class Solution:
+def row_with_max_1s(self, matrix, n, m):
+        cnt_max = 0  
+        index = -1  
+        for i in range(n):
+            cnt_ones = 0 
+            for j in range(m):
+                cnt_ones += matrix[i][j]
+            if cnt_ones > cnt_max:
+                cnt_max = cnt_ones
+                index = i
+
+        return index  
+#optimal
+#1.Start by keeping track of the highest number of 1s seen so far and the row where that occurred.
+#2.Go through each row of the matrix one by one.
+#3.For each row, use Binary Search to find the first position where a 1 appears. Then subtract that position from the total number of columns to get the number of 1s in that row.
+#4.Compare the current row's number of 1s with the highest found so far. If it's greater, update the highest count and the corresponding row number.
+#5.After checking all rows, return the row number where the highest number of 1s was found. If there are no 1s at all, return -1.
+#time complexity-O(n X logm)
+#space complexity-O(1)
+class Solution:
+    # Binary search to find the lower bound (first index where element >= x)
+    def lower_bound(self, arr, n, x):
+        low, high = 0, n - 1
+        ans = n  # Default if x not found
+
+        while low <= high:
+            mid = (low + high) // 2
+            if arr[mid] >= x:
+                ans = mid       # Potential answer found
+                high = mid - 1  # Look on the left half
+            else:
+                low = mid + 1   # Move right
+        return ans  # Return index of first element >= x
+
+    # Function to find the row with maximum number of 1s
+    def row_with_max_1s(self, matrix, n, m):
+        cnt_max = 0   # Maximum number of 1s found so far
+        index = -1    # Row index with the max 1s
+
+        for i in range(n):
+            # Calculate count of 1s using lower bound
+            cnt_ones = m - self.lower_bound(matrix[i], m, 1)
+            if cnt_ones > cnt_max:
+                cnt_max = cnt_ones
+                index = i
+        return index  # Return row index with most 1s
