@@ -1,0 +1,37 @@
+#1.The search will cover the column range from 0 to col-1, where col is the total number of columns.
+#2.We choose a middle column and identify the row with the largest element in that column.
+#3.We apply similar logic as in 1-D: if this element is bigger than both its side neighbors, we’ve found the peak.
+#4.If the left neighbor is bigger, we only search the left part; if the right neighbor is bigger, we search the right part.
+#time complexity-O(N * logM)
+#space complexity-O(1)
+class Solution:
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+        m = len(mat)
+        n = len(mat[0])
+
+        low = 0
+        high = n - 1
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            row = self.max_el(mat, mid)
+
+            left = mat[row][mid - 1] if mid - 1 >= 0 else -1
+            right = mat[row][mid + 1] if mid + 1 < n else -1
+
+            if mat[row][mid] > left and mat[row][mid] > right:
+                return [row, mid]
+
+            elif left > mat[row][mid]:
+                high = mid - 1
+
+            else:
+                low = mid + 1
+
+    def max_el(self, mat, col):
+        row = 0
+        for i in range(len(mat)):
+            if mat[i][col] > mat[row][col]:
+                row = i
+        return row
