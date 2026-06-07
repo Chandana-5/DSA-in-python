@@ -1,0 +1,48 @@
+#brutte
+#algorithm
+#The extremely naive approach is to use a linear array or list to store the elements of the given matrix and sort the list.
+#We can return the middle element of sorted list to find the me
+#time complexity-O(M*N*(log(M*N)))
+#space complexity-O(M*N)
+class Solution:
+    def findMedian(self, matrix):
+
+        elements = []
+        
+        for row in matrix:
+            for val in row:
+                elements.append(val)
+        elements.sort()
+        return elements[len(elements) // 2]
+#optimal
+#algorithm
+#Find the smallest element (low) from the first column and the largest element (high) from the last column of the matrix.
+#Calculate the median position as (R × C) // 2, where R is the number of rows and C is the number of columns.
+#Perform binary search on the range from low to high by computing mid = (low + high) // 2.
+#For each row, use binary search (upper bound) to count the number of elements less than or equal to mid, and add these counts to get the total count.
+#If the count is less than or equal to the median position, move right by setting low = mid + 1; otherwise, move left by setting high = mid - 1. Repeat until the search ends, and return low as the median.
+#time complexity-O(rows × log(max - min) × log(cols)),
+#space complexity-O(1)
+import bisect
+
+class Solution:
+    def countLessEqual(self, row, mid):
+        return bisect.bisect_right(row, mid)
+    def findMedian(self, matrix):
+        rows = len(matrix)
+        cols = len(matrix[0])
+        low = min(row[0] for row in matrix)
+        high = max(row[-1] for row in matrix)
+
+        while low < high:
+            mid = (low + high) // 2
+            count = 0
+            for row in matrix:
+                count += self.countLessEqual(row, mid)
+
+            if count < (rows * cols + 1) // 2:
+                low = mid + 1
+            else:
+                high = mid
+
+        return low
