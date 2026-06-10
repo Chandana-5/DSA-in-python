@@ -1,0 +1,10 @@
+#algorithm
+#Odd numbers leave a remainder when divided by 2, while even numbers do not.
+#Use this property to determine the parity of a number.
+#If there's a remainder, the number is odd; if not, it's even.
+#This is a simple and direct way to distinguish between even and odd values.class Solution:
+# Function to check if a number is odd
+#time complexity-O(1)
+#space complexity-O(1)
+    def isOdd(self, n):
+        return n % 2 != 0  # Return True if the number is odd, else False
