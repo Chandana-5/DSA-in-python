@@ -1,0 +1,4 @@
+#making ith bit set 
+N||(1<<i) 
+#clearing bit
+N & !(1<<i)
