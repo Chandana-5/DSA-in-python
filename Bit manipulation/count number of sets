@@ -1,0 +1,32 @@
+#1.Initialize a counter to zero.
+#2.While the number is greater than zero:
+#3.Check if the least significant bit (LSB) is 1 by performing bitwise AND with 1.
+#4.If LSB is 1, increment the counter.
+#5.Right shift the number by one bit.Return the counter.
+#time complexity-O(k), where k is the number of set bits 
+#space complexity-O(1)
+  class Solution:
+    def countSetBits(self, n):
+        count = 0  
+        while n:
+            n &= (n - 1) 
+            count += 1
+        return count
+#Initialize a counter to zero.
+While the number is greater than zero:
+Check if the least significant bit (LSB) is 1 by performing bitwise AND with 1.
+If LSB is 1, increment the counter.
+Right shift the number by one bit.
+Return the counter.
+  class Solution:
+    # Function to count the number of set bits (1s) in the binary representation of n
+    def countSetBits(self, n):
+        count = 0  # Variable to store the count of set bits
+
+        # Step 1: Count the number of set bits using bitwise operations
+        while n > 0:
+            count += (n & 1)  # Check if the least significant bit is set (1)
+            n >>= 1  # Right shift n by 1 to process the next bit
+
+        # Step 2: Return the count of set bits
+        return count
