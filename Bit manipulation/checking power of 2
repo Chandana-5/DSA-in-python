@@ -1,0 +1,10 @@
+#1.Power of two numbers have exactly one bit set in their binary form.
+#2.Subtracting one flips all bits after the set bit, creating no overlap with the original number.
+#3.A bitwise AND between the number and one less than itself will be zero only for powers of two.
+#4.This property allows for a fast check without looping or dividing.
+#time complexity-O(1)
+#space complexity-O(1)
+  class Solution:
+    # Function to check if a number is a power of two
+    def isPowerOfTwo(self, n):
+        return n > 0 and (n & (n - 1)) == 0 
