@@ -1,0 +1,19 @@
+#1.Create an empty array to hold all the subsets of the input array.
+#2.Determine the size of the power set, which is 2N, where N represents the number of elements in the input array.
+#3.Iterate through all possible numbers from 0 to 2N-1: Each number represents a unique combination of elements in the input array.
+#4.For each number, generate the corresponding subset.
+#5.After constructing each subset, add it to the array of subsets.
+#6.Return the array containing all the subsets of the input array.
+class Solution:
+    def getPowerSet(self, nums):
+        n = len(nums)
+        subsets = 1 << n
+        ans = []
+        for num in range(subsets):
+            subset = []
+            for i in range(n):
+                if num & (1 << i):
+                    subset.append(nums[i])
+            ans.append(subset)
+        return ans
+
