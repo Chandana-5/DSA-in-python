@@ -1,0 +1,18 @@
+#1.To find how many bits differ between two numbers, compare them bit by bit.
+#2.XOR highlights the positions where the two numbers have different bits.
+#3.Each set bit in the XOR result represents a required flip to match the numbers.
+#4.Count the number of set bits in the XOR result to get the total flips needed.
+#5.This provides the minimum number of bit changes to convert one number into the other.
+  class Solution:
+    # Function to get the minimum 
+    # bit flips to convert number
+    def minBitsFlip(self, start, goal):
+        num = start ^ goal
+        count = 0
+
+        for i in range(32):
+            count += (num & 1)
+            num = num >> 1
+        
+        return count
+
