@@ -1,0 +1,10 @@
+#1.Two important properties of XOR are the following:
+#2.XOR of two same numbers is always 0 i.e. a ^ a = 0. ←Property 1.
+#3.XOR of a number with 0 will result in the number itself i.e. 0 ^ a = a. ←Property 2
+class Solution:
+    def getSingleElement(self, arr):
+        xorr = 0
+        for num in arr:
+            xorr ^= num
+
+        return xorr
