@@ -1,0 +1,31 @@
+#brutte
+#1.XOR is useful for combining values in a reversible way, applying it twice cancels the effect.
+#2.To find the XOR of all numbers in a range, we can combine them one by one using XOR.
+#3.Start with an initial value that doesn't affect the result (i.e., 0).
+#4.As each number is XORed in, the result captures the cumulative effect of all values.
+#5.The final result after traversing the range holds the complete XOR of that range.
+class Solution:
+    def findRangeXOR(self, l, r):
+        ans = 0
+        for i in range(l, r + 1):
+            ans ^= i
+        
+        # Return the result
+        return ans
+#optimal
+#1.The XOR of numbers from 1 to n follows a predictable pattern based on n % 4.
+#2.This pattern helps compute XOR from 1 to any number n in constant time.
+#3.To get XOR of numbers in the range [L, R], compute XOR(1 to R) and XOR(1 to L - 1).
+#4.Apply XOR between these two results, common prefixes cancel out due to XOR properties.
+#5.This approach avoids looping through the range and achieves optimal performance.
+class Solution:
+    def XORtillN(self, n):
+        if n % 4 == 1:
+            return 1
+        if n % 4 == 2:
+            return n + 1
+        if n % 4 == 3:
+            return 0
+        return n
+    def findRangeXOR(self, l, r):
+        return self.XORtillN(l - 1) ^ self.XORtillN(r)
