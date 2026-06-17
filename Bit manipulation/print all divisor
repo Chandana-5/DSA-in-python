@@ -1,0 +1,31 @@
+#brutte
+#The brute force approach to find all the divisors of a number is to iterate through every number from 1 to N and check whether it is a divisor or not.
+#We can store all the divisors and return the list of divisors after iteration.
+#time complexity-O(N)
+#space complexity-O(N)
+class Solution:
+    def getDivisors(self, N):
+        res = []
+        for i in range(1, N + 1):
+            if N % i == 0:
+                res.append(i)
+        return res
+#optimal
+#We can optimise the previous approach by using the property that for any non-negative integer n, if d is a divisor of n then n/d is also a divisor of n.
+#This property is symmetric about the square root of N. Thus, by traversing just the first half we can avoid redundant iteration and computations improving the efficiency of the algorithm.
+#time complexity-O(sqrt(N))
+#space complexity-O(2*sqrt(N))
+import math
+
+class Solution:
+    def getDivisors(self, N):
+        res = []
+        for i in range(1, int(math.isqrt(N)) + 1):
+            if N % i == 0:
+                res.append(i)
+                if i != N // i:
+                    res.append(N // i)
+        return res
+
+
+
