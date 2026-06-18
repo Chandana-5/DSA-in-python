@@ -4,6 +4,8 @@
 #3.Start with an initial value that doesn't affect the result (i.e., 0).
 #4.As each number is XORed in, the result captures the cumulative effect of all values.
 #5.The final result after traversing the range holds the complete XOR of that range.
+#time complexity-O(R - L + 1)
+#space complexity-O(1)
 class Solution:
     def findRangeXOR(self, l, r):
         ans = 0
@@ -18,6 +20,8 @@ class Solution:
 #3.To get XOR of numbers in the range [L, R], compute XOR(1 to R) and XOR(1 to L - 1).
 #4.Apply XOR between these two results, common prefixes cancel out due to XOR properties.
 #5.This approach avoids looping through the range and achieves optimal performance.
+#time complexity-O(1)
+#space complexity-O(1)
 class Solution:
     def XORtillN(self, n):
         if n % 4 == 1:
