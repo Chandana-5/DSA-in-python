@@ -3,6 +3,8 @@
 #3.Each set bit in the XOR result represents a required flip to match the numbers.
 #4.Count the number of set bits in the XOR result to get the total flips needed.
 #5.This provides the minimum number of bit changes to convert one number into the other.
+#time complexity-O(1)
+#space complexity-O(1)
   class Solution:
     # Function to get the minimum 
     # bit flips to convert number
