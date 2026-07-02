@@ -1,0 +1,23 @@
+#For each index in the digit string, handle two cases:
+#If the index is even, the valid digits are: 0, 2, 4, 6, 8 (5 options).
+#If the index is odd, the valid digits are: 2, 3, 5, 7 (4 options).
+#Recursively compute the number of valid strings based on the index.
+#For each valid digit, move to the next index and continue recursion.
+#Return the result modulo 10^9 + 7 once all digits are chosen.
+#Time Complexity (TC): O(2^n)
+#Space Complexity (SC): O(n)
+MOD = 10**9 + 7
+def count_good_numbers(index, n):
+    if index==n:
+        return 1
+
+    result = 0
+    if index % 2 == 0:  
+        even_digits = [0, 2, 4, 6, 8]
+        for digit in even_digits:
+            result = (result + count_good_numbers(index + 1, n)) % MOD       
+    else:
+        prime_digits = [2, 3, 5, 7]
+        for digit in prime_digits:
+            result = (result + count_good_numbers(index + 1, n)) % MOD
+    return result
