@@ -1,0 +1,22 @@
+#If the stack is empty, stop.
+#Remove the top element of the stack.
+#Sort the remaining stack recursively.
+#Insert the removed element back into the stack while maintaining descending order.
+#Use a helper function to place the element in its correct position.
+#time complexity-O(n2)
+#space complexity-O(n)
+def insert(stack, temp):
+    if not stack or stack[-1] <= temp:
+        stack.append(temp)
+        return
+    val = stack.pop()
+    insert(stack, temp)
+    stack.append(val)
+
+def sortStack(stack):
+    if stack:
+        temp = stack.pop()
+        sortStack(stack)
+        insert(stack, temp)
+
+
