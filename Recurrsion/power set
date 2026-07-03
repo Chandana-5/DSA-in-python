@@ -1,0 +1,21 @@
+#Start with an empty subsequence. For each character, recursively make a decision.
+#Either include it in the subsequence or exclude it from the subsequence.
+#When you reach the end of the string, print the current subsequence.
+#time complexity-O(n * 2^n),
+#space complexity-O(n * 2^n)
+class Solution:
+    def helper(self, s, index, current, result):
+        if index == len(s):
+            result.append("".join(current))
+            return
+        self.helper(s, index + 1, current, result)
+        current.append(s[index])
+        self.helper(s, index + 1, current, result)
+
+        current.pop()
+
+    def getSubsequences(self, s):
+        result = []
+        current = []
+        self.helper(s, 0, current, result)
+        return result
