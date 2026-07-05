@@ -1,0 +1,23 @@
+def printSubsequence(index, arr, current, currentSum, k):
+    # Base case
+    if index == len(arr):
+        if currentSum == k:
+            print(current)
+        return
+
+    # Take the current element
+    current.append(arr[index])
+    printSubsequence(index + 1, arr, current, currentSum + arr[index], k)
+
+    # Backtrack
+    current.pop()
+
+    # Don't take the current element
+    printSubsequence(index + 1, arr, current, currentSum, k)
+
+
+# Driver Code
+arr = [1, 2, 1]
+k = 2
+
+printSubsequence(0, arr, [], 0, k)
